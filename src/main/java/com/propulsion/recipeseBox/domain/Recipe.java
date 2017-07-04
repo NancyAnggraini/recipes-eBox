@@ -33,7 +33,7 @@ public class Recipe {
 	@ManyToOne
 	private User user;
 	
-	@ManyToMany(mappedBy = "recipes")
+	@ManyToMany
 	private List<Ingredient> ingredients;
 	
 	@ElementCollection
@@ -51,8 +51,16 @@ public class Recipe {
 	}
 	
 	//constructor excluding id:
-	public Recipe(String name, User user, List<Ingredient> ingredients, List<String> methods, String photoUrl,
-			String weblink) {
+	public Recipe(String name, User user, List<Ingredient> ingredients, List<String> methods, String photoUrl, String weblink) {
 		this(null, name, user, ingredients, methods, photoUrl, weblink);
+	}
+	
+	//methods:
+	public void addIngredient(Ingredient ingredient) {
+		ingredients.add(ingredient);
+	}
+	
+	public void addCookingMethod(String method) {
+		methods.add(method);
 	}
 }
