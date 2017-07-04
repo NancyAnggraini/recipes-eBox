@@ -1,15 +1,10 @@
 package com.propulsion.recipeseBox.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,19 +26,25 @@ public class Ingredient {
 	@Column(unique = true)
 	private String name;
 	
-	@ManyToMany
-	@JoinTable(name = "ingredient_recipe", 
-			joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"), 
-			inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"))
-	private List<Recipe> recipes;
-
 	
 	//empty constructor for JPA:
 	public Ingredient(){
 	}
 	
 	//constructor excluding id:
-	public Ingredient(String name, List<Recipe> recipes) {
-		this(null, name, recipes);
+	public Ingredient(String name) {
+		this(null, name);
 	}
 }
+
+//@ManyToMany
+//@JoinTable(name = "ingredient_recipe", 
+//		joinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"), 
+//		inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"))
+//private List<Recipe> recipes;
+
+
+//methods:
+//public void addRecipe(Recipe recipe) {
+//	recipes.add(recipe);
+//}

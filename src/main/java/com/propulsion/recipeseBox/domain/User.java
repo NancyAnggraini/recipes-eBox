@@ -54,4 +54,9 @@ public class User {
 	public User(String firstName, String lastName, String username, String email, String password, List<Recipe> recipes) {
 		this(null, firstName, lastName, username, email, password, recipes);
 	}
+	
+	//methods:
+	public void addRecipe(Recipe recipe) {
+		recipes.add(recipe);
+	}
 }
