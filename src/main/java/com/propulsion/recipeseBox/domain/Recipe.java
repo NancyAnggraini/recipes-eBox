@@ -15,12 +15,14 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity //creating a table with the class name
 @Table(name = "recipes") //to change table name
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(exclude = "id")
+@ToString(exclude = {"ingredients"})
 public class Recipe {
 
 	//fields:

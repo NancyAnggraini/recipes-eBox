@@ -17,7 +17,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	
 	List<Recipe> findByName(String name);
 	
-	List<Recipe> findByNameContaining(String keyword);
+	List<Recipe> findByNameContainingIgnoreCase(String keyword);
 	
 	//how does it know it’s users id? => the name '...UserId'
 	List<Recipe> findByUserId(Long userId); 
