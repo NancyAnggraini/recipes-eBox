@@ -22,8 +22,8 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	//how does it know it’s users id? => the name '...UserId'
 	List<Recipe> findByUserId(Long userId); 
 	
-	// loop list of recipe, and find match by name:
-	//List<Recipe> findByIngredientId(Long ingredientId); //how does it know it’s ingredients id?
+	//Loop list of recipe, and find match by name:
+//	List<Recipe> findByIngredientId(Long ingredientId);
 	//WHAT IF SEARCH BY MULTIPLE INGREDIENTS? => LATER
 	
 	void deleteById(Long id);
