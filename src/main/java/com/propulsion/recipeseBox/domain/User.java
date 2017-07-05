@@ -14,12 +14,14 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity //creating a table with the class name
 @Table(name = "users") //to change table name
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(exclude = "id")
+@ToString(exclude = {"password","recipes"})
 public class User {
 
 	//fields:

@@ -12,7 +12,7 @@ public interface RecipeService {
 	
 	List<Recipe> findByName(String name);
 	
-	List<Recipe> findByNameContaining(String keyword);
+	List<Recipe> findByNameContainingIgnoreCase(String keyword);
 	
 	List<Recipe> findByUserId(Long userId); 
 	

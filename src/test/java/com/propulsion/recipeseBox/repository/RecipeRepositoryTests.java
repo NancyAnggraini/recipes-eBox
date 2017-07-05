@@ -64,7 +64,7 @@ public class RecipeRepositoryTests {
 	public void testFindByNameContaining() {
 		userRepository.save(user3);
 		recipeRepository.save(recipe2);
-		assertThat(recipeRepository.findByNameContaining("Cake").size()).isEqualTo(2);
+		assertThat(recipeRepository.findByNameContainingIgnoreCase("cake").size()).isEqualTo(2);
 	}
 	
 	@Test

@@ -36,8 +36,8 @@ public class DefaultRecipeService implements RecipeService {
 	}
 
 	@Override
-	public List<Recipe> findByNameContaining(String keyword) {
-		return this.recipeRepository.findByNameContaining(keyword);
+	public List<Recipe> findByNameContainingIgnoreCase(String keyword) {
+		return this.recipeRepository.findByNameContainingIgnoreCase(keyword);
 	}
 
 	@Override
