@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,25 +25,31 @@ import lombok.EqualsAndHashCode;
 public class Recipe {
 
 	//fields:
+	@JsonView(JsonViews.Public.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = false, length = 140)
 	private String name;
 	
 	@ManyToOne
 	private User user;
 	
+	@JsonView(JsonViews.Public.class)
 	@ElementCollection
 	private List<String> ingredients = new ArrayList<>();
 	
+	@JsonView(JsonViews.Public.class)
 	@ElementCollection
 	private List<String> cookingMethods = new ArrayList<>();
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = true)
 	private String photoUrl;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = true)
 	private String weblink;
 	
@@ -74,6 +83,8 @@ public class Recipe {
 		getCookingMethods().add(cookingMethod);
 	}
 	
+	@JsonView(JsonViews.Public.class)
+	@JsonProperty
 	public String getRecipeOwner() {
 		return (this.user != null ? this.user.getUsername() : null);
 	}
