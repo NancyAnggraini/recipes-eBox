@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.propulsion.recipeseBox.domain.JsonViews;
 import com.propulsion.recipeseBox.domain.Recipe;
 import com.propulsion.recipeseBox.service.RecipeService;
 
@@ -33,6 +35,7 @@ public class RestRecipeController {
 	}
 	
 	//TO LIST ALL OF THE RECIPES OF ALL USERS:
+	@JsonView(JsonViews.Public.class)
 	@GetMapping
 	public List<Recipe> retrieveAllRecipes() {
 		List<Recipe> recipes = recipeService.findAll();
@@ -42,12 +45,14 @@ public class RestRecipeController {
 	//TO VIEW ONE CHOSEN RECIPE REGARDLESS THE USER:
 	//(CAN BE ALSO USED WHEN A SIGNED IN USER WANTS TO VIEW A SPECIFIC RECIPE)
 	//WHEN A RECIPE IS VIEWED, WILL THE INGREDIENTS & METHODS DATA BE THERE TOO?
+	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{id}")
 	public Recipe retrieveRecipeById(@PathVariable Long id) {
 		return recipeService.findById(id);
 	}
 	
 	//TO SEARCH A LIST OF RECIPES BY KEYWORD:
+	@JsonView(JsonViews.Public.class)
 	@RequestMapping(value = "/search", params = "query", method=RequestMethod.GET)
 	public List<Recipe> retrieveRecipesContaining(@RequestParam("query")  String keyword) {
 		return recipeService.findAllContainingKeyword(keyword);

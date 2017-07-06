@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.propulsion.recipeseBox.domain.JsonViews;
 import com.propulsion.recipeseBox.domain.Recipe;
 import com.propulsion.recipeseBox.domain.User;
 import com.propulsion.recipeseBox.service.RecipeService;
@@ -35,12 +37,14 @@ public class RestUserController {
 	}
 
 	//THE APP DOESN'T NEED THIS AT THE MOMENT:
-//	@GetMapping
-//	public List<User> retrieveAllUser() {
-//		return userService.findAll();	
-//	}
+	@JsonView(JsonViews.Public.class)
+	@GetMapping
+	public List<User> retrieveAllUser() {
+		return userService.findAll();	
+	}
 	
 	//TO FIND THE USER AFTER SIGNING-IN:
+	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{id}")
 	public User retrieveUserById(@PathVariable Long id) {
 		User user = userService.findById(id);
@@ -49,12 +53,14 @@ public class RestUserController {
 	}
 	
 	//TO GET THE LIST OF RECIPES OF A USER:
+	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{id}/recipes")
 	public List<Recipe> retrieveRecipesByUserId(@PathVariable Long id) {
 		return recipeService.findAllByUserId(id);
 	}
 	
 	//FOR USER TO CREATE AN ACCOUNT:
+	@JsonView(JsonViews.NewUser.class)
 	@PostMapping
 	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
 		User savedUser = userService.save(postedUser);

@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,22 +27,28 @@ import lombok.ToString;
 public class User {
 
 	//fields:
+	@JsonView(JsonViews.Public.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(name = "last_name", nullable = false, length = 50)
 	private String lastName;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(unique = true, nullable = false, length = 50)
 	private String username;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(unique = true, nullable = false, length = 100)
 	private String email;
 	
+	@JsonView(JsonViews.NewUser.class)
 	// BCrypt encoded passwords can need 50-76 characters.
 	@Column(nullable = false, length = 76)
 	private String password;

@@ -10,3 +10,4 @@ public class RecipesEBoxApplication {
 		SpringApplication.run(RecipesEBoxApplication.class, args);
 	}
 }
+
