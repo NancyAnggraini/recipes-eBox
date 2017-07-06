@@ -51,7 +51,7 @@ public class RestUserController {
 	//TO GET THE LIST OF RECIPES OF A USER:
 	@GetMapping("/{id}/recipes")
 	public List<Recipe> retrieveRecipesByUserId(@PathVariable Long id) {
-		return recipeService.findByUserId(id);
+		return recipeService.findAllByUserId(id);
 	}
 	
 	//FOR USER TO CREATE AN ACCOUNT:

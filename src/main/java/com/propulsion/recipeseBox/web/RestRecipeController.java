@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 
 import com.propulsion.recipeseBox.domain.Recipe;
-import com.propulsion.recipeseBox.service.IngredientService;
 import com.propulsion.recipeseBox.service.RecipeService;
 
 @RestController
@@ -27,12 +26,10 @@ import com.propulsion.recipeseBox.service.RecipeService;
 public class RestRecipeController {
 
 	private final RecipeService recipeService;
-	private final IngredientService ingredientService;
 	
 	@Autowired
-	public RestRecipeController(RecipeService recipeService, IngredientService ingredientService) {
+	public RestRecipeController(RecipeService recipeService) {
 		this.recipeService = recipeService;
-		this.ingredientService = ingredientService;
 	}
 	
 	//TO LIST ALL OF THE RECIPES OF ALL USERS:
@@ -53,20 +50,20 @@ public class RestRecipeController {
 	//TO SEARCH A LIST OF RECIPES BY KEYWORD:
 	@RequestMapping(value = "/search", params = "query", method=RequestMethod.GET)
 	public List<Recipe> retrieveRecipesContaining(@RequestParam("query")  String keyword) {
-		return recipeService.findByNameContainingIgnoreCase(keyword);
+		return recipeService.findAllContainingKeyword(keyword);
 	}
 	
 	//TO CREATE A NEW RECIPE:
-	@PostMapping
-	public HttpEntity<Void> createNewRecipe(@RequestBody Recipe postedRecipe) {
-		Recipe savedRecipe = recipeService.save(postedRecipe);
-		
-		
-		UriComponents uriComponents = fromMethodCall(
-			on(getClass()).retrieveRecipeById(savedRecipe.getId())).build();
-		
-		return ResponseEntity.created(uriComponents.encode().toUri()).build();
-	}
+//	@PostMapping
+//	public HttpEntity<Void> createNewRecipe(@RequestBody Recipe postedRecipe) {
+//		Recipe savedRecipe = recipeService.saveRecipeForUser(postedRecipe, userId);
+//		
+//		
+//		UriComponents uriComponents = fromMethodCall(
+//			on(getClass()).retrieveRecipeById(savedRecipe.getId())).build();
+//		
+//		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+//	}
 
 	
 	
