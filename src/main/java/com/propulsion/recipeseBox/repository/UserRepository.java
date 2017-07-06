@@ -8,15 +8,18 @@ import com.propulsion.recipeseBox.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	@SuppressWarnings("unchecked")
-	User save(User user);
+	//NOT NEEDED (TAKEN CARE BY JPA)
+//	@SuppressWarnings("unchecked")
+//	User save(User user);
 	
+	// Find by user.id
 	User findById(Long id);
 	
+	// Find by user.username
 	User findByUsername(String username);
 	
+	// Find by user.email
 	User findByEmail(String email);
 	
 }
 
-//User has a list of recipes. What to do with them? => not handle it from here (segregate!)

@@ -1,5 +1,6 @@
 package com.propulsion.recipeseBox.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,21 +9,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity //creating a table with the class name
 @Table(name = "recipes") //to change table name
-@AllArgsConstructor
 @Data
-@EqualsAndHashCode(exclude = "id")
-@ToString(exclude = {"ingredients"})
+@EqualsAndHashCode(of = { "name", "user", "ingredients", "cookingMethods", "photoUrl", "weblink" })
 public class Recipe {
 
 	//fields:
@@ -30,16 +26,17 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false, length = 140)
 	private String name;
 	
 	@ManyToOne
 	private User user;
 	
-	@ManyToMany
-	private List<Ingredient> ingredients;
+	@ElementCollection
+	private List<String> ingredients = new ArrayList<>();
 	
 	@ElementCollection
-	private List<String> methods;
+	private List<String> cookingMethods = new ArrayList<>();
 	
 	@Column(nullable = true)
 	private String photoUrl;
@@ -48,21 +45,36 @@ public class Recipe {
 	private String weblink;
 	
 	
-	//empty constructor for JPA:
 	public Recipe() {
+		/* default constructor: required by JPA */
 	}
 	
 	//constructor excluding id:
-	public Recipe(String name, User user, List<Ingredient> ingredients, List<String> methods, String photoUrl, String weblink) {
-		this(null, name, user, ingredients, methods, photoUrl, weblink);
+	public Recipe(String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
+		this.name = name;
+		this.user = user;
+		this.ingredients = ingredients;
+		this.cookingMethods = cookingMethods;
+		this.photoUrl = photoUrl;
+		this.weblink = weblink;
+	}
+	
+	//constructor with id:
+	public Recipe(Long id, String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
+		this(name, user, ingredients, cookingMethods, photoUrl, weblink);
+		this.id = id;
 	}
 	
 	//methods:
-	public void addIngredient(Ingredient ingredient) {
-		ingredients.add(ingredient);
+	public void addIngredient(String ingredient) {
+		getIngredients().add(ingredient);
 	}
 	
-	public void addCookingMethod(String method) {
-		methods.add(method);
+	public void addCookingMethod(String cookingMethod) {
+		getCookingMethods().add(cookingMethod);
+	}
+	
+	public String getRecipeOwner() {
+		return (this.user != null ? this.user.getUsername() : null);
 	}
 }

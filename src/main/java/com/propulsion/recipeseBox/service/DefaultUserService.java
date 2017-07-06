@@ -22,6 +22,12 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public User save(User user) {
+		// Make sure we are saving a new user and not accidentally updating an existing user.
+		user.setId(null);
+
+		// A new user cannot have recipes before the account exists.
+		user.getRecipes().clear();
+
 		return this.userRepository.save(user);
 	}
 

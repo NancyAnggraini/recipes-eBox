@@ -6,15 +6,13 @@ import com.propulsion.recipeseBox.domain.Recipe;
 
 public interface RecipeService {
 
-	Recipe save(Recipe recipe);
+	Recipe saveRecipeForUser(Recipe recipe, Long userId);
 	
 	Recipe findById(Long id);
 	
-	List<Recipe> findByName(String name);
+	List<Recipe> findAllContainingKeyword(String keyword);
 	
-	List<Recipe> findByNameContainingIgnoreCase(String keyword);
-	
-	List<Recipe> findByUserId(Long userId); 
+	List<Recipe> findAllByUserId(Long userId); 
 	
 	List<Recipe> findAll();
 	
