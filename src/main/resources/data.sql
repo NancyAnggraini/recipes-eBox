@@ -3,10 +3,14 @@ insert into users(id, email, first_name, last_name, password, username) values(2
 insert into users(id, email, first_name, last_name, password, username) values(3, 'example3@email.com', 'Mickey', 'Mouse', 'password', 'mickeyMouse');
 insert into users(id, email, first_name, last_name, password, username) values(4, 'example4@email.com', 'Minnie', 'Mouse', 'password', 'minnieMouse');
 
-insert into recipes(id, name, photo_url, weblink, user_id) values(1, 'Banana Cake', 'photoUrl1', 'www.otherRecipe1.com', 1);
-insert into recipes(id, name, photo_url, weblink, user_id) values(2, 'Chocolate Cake', 'photoUrl2', 'www.otherRecipe2.com', 1);
-insert into recipes(id, name, photo_url, weblink, user_id) values(3, 'Roasted Chicken', 'photoUrl3', 'www.otherRecipe3.com', 2);
-insert into recipes(id, name, photo_url, weblink, user_id) values(4, 'Avocado Smoothie', 'photoUrl4', 'www.otherRecipe4.com', 3);
+insert into recipes(id, name, photo_url, weblink, user_id) values(1, 'Banana Cake', 'http://lorempixel.com/200/180/food/1', 'www.otherRecipe1.com', 1);
+insert into recipes(id, name, photo_url, weblink, user_id) values(2, 'Chocolate Cake', 'http://lorempixel.com/200/180/food/2', 'www.otherRecipe2.com', 1);
+insert into recipes(id, name, photo_url, weblink, user_id) values(3, 'Roasted Chicken', 'http://lorempixel.com/200/180/food/3', 'www.otherRecipe3.com', 2);
+insert into recipes(id, name, photo_url, weblink, user_id) values(4, 'Avocado Smoothie', 'http://lorempixel.com/200/180/food/4', 'www.otherRecipe4.com', 3);
+insert into recipes(id, name, photo_url, weblink, user_id) values(5, 'Cheese Fondue', 'http://lorempixel.com/200/180/food/5', 'www.otherRecipe5.com', 2);
+insert into recipes(id, name, photo_url, weblink, user_id) values(6, 'Sunny Side Up Egg', 'http://lorempixel.com/200/180/food/6', 'www.otherRecipe6.com', 2);
+insert into recipes(id, name, photo_url, weblink, user_id) values(7, 'Drunken Spicy Shrimps', 'http://lorempixel.com/200/180/food/7', 'www.otherRecipe7.com', 4);
+insert into recipes(id, name, photo_url, weblink, user_id) values(8, 'Steamed Fish Asian Style', 'http://lorempixel.com/200/180/food/8', 'www.otherRecipe8.com', 4);
 
 insert into recipe_ingredients(recipe_id, ingredients) values(1, '4 bananas');
 insert into recipe_ingredients(recipe_id, ingredients) values(1, '100 gr flour');
@@ -41,4 +45,36 @@ insert into recipe_ingredients(recipe_id, ingredients) values(4, '2 tsp honey');
 
 insert into recipe_cooking_methods(recipe_id, cooking_methods) values(4, 'put all ingredients in a mixer');
 insert into recipe_cooking_methods(recipe_id, cooking_methods) values(4, 'serve cold');
+
+insert into recipe_ingredients(recipe_id, ingredients) values(5, 'cheese fondue pack');
+
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(5, 'follow instructions on package');
+
+insert into recipe_ingredients(recipe_id, ingredients) values(6, 'eggs');
+insert into recipe_ingredients(recipe_id, ingredients) values(6, 'herb butter');
+
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(6, 'put butter in a pan on medium heat');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(6, 'crack egg on pan and season');
+
+insert into recipe_ingredients(recipe_id, ingredients) values(7, 'shrimps');
+insert into recipe_ingredients(recipe_id, ingredients) values(7, '1 can beer');
+insert into recipe_ingredients(recipe_id, ingredients) values(7, 'lots of piri-piri');
+insert into recipe_ingredients(recipe_id, ingredients) values(7, 'butter');
+insert into recipe_ingredients(recipe_id, ingredients) values(7, 'garlic');
+
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(7, 'clean shrimps, sprinkle with minced garlic and piri-piri');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(7, 'heat butter in a pan, add the shrimps');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(7, 'when half cooked, add the beer. Continue cooking until beer is mostly evaporated');
+
+insert into recipe_ingredients(recipe_id, ingredients) values(8, '1 fish cleaned');
+insert into recipe_ingredients(recipe_id, ingredients) values(8, 'low sodium soy sauce');
+insert into recipe_ingredients(recipe_id, ingredients) values(8, 'sesame oil');
+insert into recipe_ingredients(recipe_id, ingredients) values(8, 'ginger sliced into small sticks');
+insert into recipe_ingredients(recipe_id, ingredients) values(8, 'spring onions chopped');
+insert into recipe_ingredients(recipe_id, ingredients) values(8, 'white wine');
+
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(8, 'stuff the cleaned fish with ginger and spring onions');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(8, 'steam fish over white wine for 10-15 mnts');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(8, 'prepare sauce: mix soy sauce with sesame oil and a little bit water');
+insert into recipe_cooking_methods(recipe_id, cooking_methods) values(8, 'serve fish on a plate and pour sauce on top of it');
 
