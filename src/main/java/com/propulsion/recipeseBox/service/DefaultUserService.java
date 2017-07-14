@@ -43,8 +43,12 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public User findByEmail(String email) {
-		return this.userRepository.findByEmail(email);
+		User user = this.userRepository.findByEmail(email);
+		System.out.println(user);
+		return user;
 	}
+	
+	
 
 	@Override
 	public List<User> findAll() {
@@ -52,3 +56,5 @@ public class DefaultUserService implements UserService {
 	}
 
 }
+
+

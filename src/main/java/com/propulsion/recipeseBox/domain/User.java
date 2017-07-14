@@ -23,7 +23,7 @@ import lombok.ToString;
 @Table(name = "users") //to change table name
 @Data
 @EqualsAndHashCode(of = "id")
-@ToString(exclude = {"password","recipes"})
+@ToString(exclude = {"recipes"})
 public class User {
 
 	//fields:
@@ -53,7 +53,7 @@ public class User {
 	@Column(nullable = false, length = 76)
 	private String password;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonBackReference
 	private List<Recipe> recipes = new ArrayList<>();
 	
@@ -78,8 +78,9 @@ public class User {
 	
 	//methods:
 	public void addRecipe(Recipe recipe) {
-		getRecipes().add(recipe);
-		recipe.setUser(this);
+//		getRecipes().add(recipe);
+//		recipe.setUser(this);
+		this.recipes.add(recipe);
 //		this.recipes.add(recipe);
 //		recipe.setUser(this);
 	}
