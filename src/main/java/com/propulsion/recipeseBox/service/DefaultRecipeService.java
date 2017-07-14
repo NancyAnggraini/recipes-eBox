@@ -25,15 +25,17 @@ public class DefaultRecipeService implements RecipeService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Recipe saveRecipeForUser(Recipe recipe, Long userId) {
 		// Link recipe to user.
 		User user = userService.findById(userId);
 		user.addRecipe(recipe);
 		
 		// Make sure we are saving a new recipe and not accidentally updating an existing recipe.
-		recipe.setId(null);
+//		recipe.setId(null);
 		
 		return this.recipeRepository.save(recipe);
+//		return recipe;
 	}
 
 	@Override

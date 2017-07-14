@@ -15,12 +15,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity //creating a table with the class name
 @Table(name = "recipes") //to change table name
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(of = { "name", "user", "ingredients", "cookingMethods", "photoUrl", "weblink" })
 public class Recipe {
 
@@ -69,10 +71,10 @@ public class Recipe {
 	}
 	
 	//constructor with id:
-	public Recipe(Long id, String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
-		this(name, user, ingredients, cookingMethods, photoUrl, weblink);
-		this.id = id;
-	}
+//	public Recipe(Long id, String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
+//		this(name, user, ingredients, cookingMethods, photoUrl, weblink);
+//		this.id = id;
+//	}
 	
 	//methods:
 	public void addIngredient(String ingredient) {
@@ -87,5 +89,11 @@ public class Recipe {
 	@JsonProperty
 	public String getRecipeOwner() {
 		return (this.user != null ? this.user.getUsername() : null);
+	}
+	
+	@JsonView(JsonViews.Public.class)
+	@JsonProperty
+	public Long getRecipeOwnerId() {
+		return (this.user != null ? this.user.getId() : null);
 	}
 }
