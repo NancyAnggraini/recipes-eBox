@@ -6,7 +6,7 @@ import com.propulsion.recipeseBox.domain.Recipe;
 
 public interface RecipeService {
 
-	Recipe saveRecipeForUser(Recipe recipe, Long userId);
+	Recipe saveRecipeForUser(Recipe recipe);
 	
 	Recipe findById(Long id);
 	

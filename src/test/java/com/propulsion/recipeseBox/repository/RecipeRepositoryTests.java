@@ -27,8 +27,7 @@ public class RecipeRepositoryTests {
 	
 	@Autowired
 	UserRepository userRepository;
-	
-	User user3 = new User("Jamie", "Doe", "jamieDoe1", "example3@email.com", "password");
+	User user3 = new User("Testing", "Test", "TestingTest", "testing@email.com", "password");
 	Recipe recipe2 = new Recipe("Chocolate Cake", user3, new ArrayList<String>(), new ArrayList<String>(), "myFotoUrl", null);
 	
 	@Test
@@ -38,10 +37,11 @@ public class RecipeRepositoryTests {
 	
 	@Test
 	public void saveRecipe() {
-		assertThat(recipeRepository.count()).isEqualTo(1);
+		assertThat(recipeRepository.count()).isEqualTo(16);
 		userRepository.save(user3);
-		recipeRepository.save(recipe2);
-		assertThat(recipeRepository.count()).isEqualTo(2);
+		Recipe recipe = recipeRepository.save(recipe2);
+		assertThat(recipeRepository.count()).isEqualTo(17);
+		assertThat(recipe.getId()).isNotNull();
 	}
 	
 	@Test

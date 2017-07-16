@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.propulsion.recipeseBox.domain.User;
 import com.propulsion.recipeseBox.domain.Recipe;
 import com.propulsion.recipeseBox.repository.RecipeRepository;
 
@@ -16,25 +15,24 @@ import com.propulsion.recipeseBox.repository.RecipeRepository;
 public class DefaultRecipeService implements RecipeService {
 
 	private final RecipeRepository recipeRepository;
-	private final UserService userService;
+
 	
 	@Autowired
-	public DefaultRecipeService(RecipeRepository recipeRepository, UserService userService) {
+	public DefaultRecipeService(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
-		this.userService = userService;
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public Recipe saveRecipeForUser(Recipe recipe, Long userId) {
-		// Link recipe to user.
-		User user = userService.findById(userId);
-		user.addRecipe(recipe);
+	public Recipe saveRecipeForUser(Recipe recipe) {
+		Recipe res = recipeRepository.save(recipe);
+		
+		res.getUser().addRecipe(recipe);
 		
 		// Make sure we are saving a new recipe and not accidentally updating an existing recipe.
-//		recipe.setId(null);
+		//recipe.setId(null);
 		
-		return this.recipeRepository.save(recipe);
+		return res;
 //		return recipe;
 	}
 

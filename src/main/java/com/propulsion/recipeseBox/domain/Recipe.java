@@ -18,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity //creating a table with the class name
 @Table(name = "recipes") //to change table name
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = { "name", "user", "ingredients", "cookingMethods", "photoUrl", "weblink" })
 public class Recipe {
 
@@ -36,7 +38,7 @@ public class Recipe {
 	@Column(nullable = false, length = 140)
 	private String name;
 	
-	@ManyToOne
+	@ManyToOne(optional=false)
 	private User user;
 	
 	@JsonView(JsonViews.Public.class)
@@ -54,12 +56,7 @@ public class Recipe {
 	@JsonView(JsonViews.Public.class)
 	@Column(nullable = true)
 	private String weblink;
-	
-	
-	public Recipe() {
-		/* default constructor: required by JPA */
-	}
-	
+		
 	//constructor excluding id:
 	public Recipe(String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
 		this.name = name;
@@ -69,12 +66,6 @@ public class Recipe {
 		this.photoUrl = photoUrl;
 		this.weblink = weblink;
 	}
-	
-	//constructor with id:
-//	public Recipe(Long id, String name, User user, List<String> ingredients, List<String> cookingMethods, String photoUrl, String weblink) {
-//		this(name, user, ingredients, cookingMethods, photoUrl, weblink);
-//		this.id = id;
-//	}
 	
 	//methods:
 	public void addIngredient(String ingredient) {
